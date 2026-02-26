@@ -59,3 +59,8 @@ def visualize_graph(graph_documents):
 
     net.set_options('{"physics": {"forceAtlas2Based": {"springLength": 200}, "solver": "forceAtlas2Based"}}')
     net.save_graph("bio_knowledge_graph.html")
+
+def generate_knowledge_graph(text):
+    graph_documents = asyncio.run(extract_graph_data(text))
+    net = visualize_graph(graph_documents)
+    return net
