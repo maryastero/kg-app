@@ -1,0 +1,25 @@
+name: Streamlit App CI
+
+on: [push, pull_request]
+
+jobs:
+  test-app:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install pytest # Ensure testing tools are installed
+
+      - name: Run Mocked Tests
+        run: |
+          # This runs our local mock test instead of the live one
+          python -m pytest test_app.py
